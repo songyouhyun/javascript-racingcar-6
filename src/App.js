@@ -15,22 +15,19 @@ class App {
     let attemptCount = await MissionUtils.Console.readLineAsync('시도할 횟수는 몇 회인가요?\n');
     attemptCount = parseInt(attemptCount);
 
-    if (attemptCount == NaN) {
+    if (attemptCount === NaN) {
       throw new Error('[ERROR] 숫자가 잘못된 형식입니다.')
     }
 
     let map = new Map();
-
+    let advance;
 
     // 실행 결과 출력
     MissionUtils.Console.print('실행 결과');
     for (let i = 0; i < attemptCount; i++) {
       playerNames.forEach((playerName) => {
 
-        // 기존 전진 회수를 가져온다.
-        let advance = map.get(playerName);
-
-        // 없다면 '' 할당
+        advance = map.get(playerName);
         if (!advance) {
           advance = '';
         }
@@ -39,13 +36,14 @@ class App {
         if (random >= 4) {
           advance += '-';
         }
+
         map.set(playerName, advance);
         MissionUtils.Console.print(`${playerName} : ${advance}`);
       })
       MissionUtils.Console.print('\n');
     }
 
-    let champion;
+    let champion = '';
     let max = 0;
 
     // 사용자별 전진 횟수를 비교해서 전진 횟수가 가장 큰 사용자 이름을 출력
