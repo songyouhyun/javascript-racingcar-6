@@ -48,13 +48,11 @@ class App {
 
     // 사용자별 전진 횟수를 비교해서 전진 횟수가 가장 큰 사용자 이름을 출력
     map.forEach((value, key) => {
-      if (max <= value.length) {
-        if (max === value.length) {
-          champion += ', ' + key;
-        } else {
-          max = value.length;
-          champion = key;
-        }
+      if (max < value.length) {
+        max = value.length;
+        champion = key;
+      } else if (max === value.length) {
+        champion += ', ' + key;
       }
     });
 
